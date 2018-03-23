@@ -3,6 +3,9 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
+const isOnline = process.argv[2] === 'production'
+    // 在这定义七牛云的地址
+const qiNiuAssets = '//s.qfpay.com.cn/fe_fenqi_mis/'
 
 module.exports = {
     dev: {
@@ -49,7 +52,7 @@ module.exports = {
         // Paths
         assetsRoot: path.resolve(__dirname, "../dist"),
         assetsSubDirectory: "static",
-        assetsPublicPath: "/",
+        assetsPublicPath: isOnline ? qiNiuAssets : '/',
 
         /**
          * Source Maps
