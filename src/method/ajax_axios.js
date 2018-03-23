@@ -18,11 +18,11 @@ let ajax_get = (
     let _this = that;
     //console.log('get');
     let loadingInstance = Loading.service({
-        fullscreen: true
-            // lock: true,
-            // text: "Loading",
-            // spinner: "el-icon-loading",
-            // background: "rgba(0, 0, 0, 0.7)"
+        fullscreen: true, // lock: true,
+        text: "Loading",
+        spinner: "el-icon-loading",
+        background: "rgba(0, 0, 0, 0)",
+        customClass: 'bigIcon'
     });
     _this.$http
         .get(url, {
@@ -85,7 +85,12 @@ let ajax_post = (
 ) => {
     let _this = that;
     let loadingInstance = Loading.service({
-        fullscreen: true
+        fullscreen: true,
+        // lock: true,
+        text: "Loading",
+        spinner: "el-icon-loading",
+        background: "rgba(0, 0, 0, 0)",
+        customClass: 'bigIcon'
     });
     //console.log('post');
     _this.$http

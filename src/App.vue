@@ -610,11 +610,6 @@
                       background-size: auto 20px;
                       top: 3px;
                     }
-                    &.icon_fenrun {
-                      background: url('./img/ic_fenrun.png') left center no-repeat;
-                      background-size: auto 20px;
-                      top: 3px;
-                    }
                   }
                 }
                 &:last-child {
@@ -752,11 +747,11 @@
           width: 16px;
           height: 16px;
           position: relative;
-          &.icon_yester_w {
-            background: url('./img/yester_iw.png') center center no-repeat;
-            background-size: 16px auto;
-            top: 2px;
-          }
+          // &.icon_yester_w {
+          //   background: url('./img/yester_iw.png') center center no-repeat;
+          //   background-size: 16px auto;
+          //   top: 2px;
+          // }
         }
         &.is-active {
           background: #252424;
@@ -771,11 +766,11 @@
             background: @orangebg_color;
           }
           i.icon_left {
-            &.icon_yester_w {
-              background: url('./img/yester_i.png') center center no-repeat;
-              background-size: 16px auto;
-              top: 2px;
-            }
+            // &.icon_yester_w {
+            //   background: url('./img/yester_i.png') center center no-repeat;
+            //   background-size: 16px auto;
+            //   top: 2px;
+            // }
           }
         }
         a {
@@ -1120,6 +1115,22 @@
   }
   
   //*elementUI样式调整---------------------------------------------------------------------------------------------------------------------*/
+  //加载按钮
+  .bigIcon {
+    .el-loading-spinner{
+      width:120px;
+      left:50%;
+      margin-left:-60px;
+      height: 120px;
+      border-radius: 10px;
+      background:rgba(0, 0, 0, 0.6);
+      padding-top: 23px;
+      box-sizing: border-box;
+    }
+    .el-loading-spinner i{
+      font-size:50px;
+    }
+  }
   //table边框火狐浏览器显示--兼容性处理
   table {
     border-collapse: separate; //保留边框
