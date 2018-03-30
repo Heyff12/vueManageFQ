@@ -36,7 +36,7 @@ export default new Router({
             component: partner_index
         },
         {
-            path: "/partner_excel",
+            path: "/partner_excel/:partner_id",
             name: "partner_excel",
             component: partner_excel
         },

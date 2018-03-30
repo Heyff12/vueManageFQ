@@ -68,10 +68,10 @@
                     <el-table-column prop="update_time" label="更新时间" resizable min-width="120px">
                     </el-table-column>
                     <el-table-column label="操作" resizable min-width="100px">
-<template slot-scope="scope">
+<!-- <template slot-scope="scope">
     <el-button type="warning" @click="editItem(scope.row)" plain>
         编辑</el-button>
-</template>
+</template> -->
                     </el-table-column>
                 </el-table>
             </template>

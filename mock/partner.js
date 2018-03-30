@@ -100,3 +100,21 @@ var sale_edit = {
     data: {}
 };
 Mock.mock(/qudao_mis\/v1\/api\/partner\/opuser\/modify/, "post", sale_edit);
+//合作商基本信息
+var partnerBig_list = {
+    respcd: "0000",
+    respmsg: "OK",
+    resperr: "",
+    data: {
+        partner_cnt: 200, // 商户数
+        page: 1,
+        page_size: 10,
+        "partner_info|50-80": [{
+            "partner_id|+10": 1234567,
+            partner_name: Random.cword(10),
+            join_time: Random.datetime("yyyy-MM-dd HH:mm:ss"),
+            "status|1": [2, 1]
+        }]
+    }
+};
+Mock.mock(/fenqi_mis\/v1\/api\/partner\/list/, "get", partnerBig_list);

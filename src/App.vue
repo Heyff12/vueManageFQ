@@ -13,7 +13,7 @@
             <el-submenu index="1">
               <template slot="title"><i class="icon_left icon_manage_w"></i>合作商信息管理</template>
               <el-menu-item index="/partner_index">合作商信息</el-menu-item>
-              <el-menu-item index="/partner_excel">批量导入EXCEL模板</el-menu-item>
+              <!-- <el-menu-item index="/partner_excel">批量导入EXCEL模板</el-menu-item> -->
               <el-menu-item index="/partner_region">大区责任人信息</el-menu-item>
               <el-menu-item index="/partner_manager">门店管理人信息</el-menu-item>
               <el-menu-item index="/partner_sales">门店销售员信息</el-menu-item>

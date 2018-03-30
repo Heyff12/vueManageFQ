@@ -56,8 +56,10 @@
                     </el-table-column>
                     <el-table-column label="操作" resizable min-width="100px">
                         <template slot-scope="scope">
-                            <el-button type="warning" @click="editItem(scope.row)" plain>
-                                编辑</el-button>
+                            <!-- <el-button type="warning" @click="editItem(scope.row)" plain>
+                                编辑</el-button> -->
+                            <el-button type="warning" @click="toLead(scope.row.partner_id)" plain>
+                                批量导入成员</el-button>
                         </template>
                     </el-table-column>
                 </el-table>
@@ -210,7 +212,7 @@ export default {
             }
           }
         ]
-      },
+      }
     };
   },
   created: function() {
@@ -227,8 +229,14 @@ export default {
       searchPost(this.searchkey.partner_id, "partner_id", post_data);
       searchPost(this.searchkey.status, "status", post_data, true);
       //获取时间
-      this.searchkey.s_join_dtm = this.get_datetime(this.dateRange[0]);
-          this.searchkey.e_join_dtm = this.get_datetime(this.dateRange[1]);
+      console.log(this.dateRange);
+      if (this.dateRange) {
+        this.searchkey.s_join_dtm = this.get_datetime(this.dateRange[0]);
+        this.searchkey.e_join_dtm = this.get_datetime(this.dateRange[1]);
+      } else {
+        this.searchkey.s_join_dtm = "";
+        this.searchkey.e_join_dtm = "";
+      }
       searchPost(this.searchkey.s_join_dtm, "s_join_dtm", post_data);
       searchPost(this.searchkey.e_join_dtm, "e_join_dtm", post_data);
       this.$ajax_axios.ajax_get(this, this.list_url, post_data, data_return => {
@@ -250,6 +258,15 @@ export default {
     resetForm: function(formName) {
       this.$refs[formName].resetFields();
       this.searchkey.status = "";
+    },
+    //批量导入
+    toLead(id) {
+      this.$router.push({
+        name: "partner_excel",
+        params: {
+          partner_id: id
+        }
+      });
     },
     //新增
     addItem() {},
@@ -352,12 +369,10 @@ export default {
       let hour = _this.date_long(date.getHours());
       let min = _this.date_long(date.getMinutes());
       let sec = _this.date_long(date.getSeconds());
-    //   return (
-    //     year + "-" + month + "-" + day + " " + hour + ":" + min + ":" + sec
-    //   );
-      return (
-        year + "-" + month + "-" + day
-      );
+      //   return (
+      //     year + "-" + month + "-" + day + " " + hour + ":" + min + ":" + sec
+      //   );
+      return year + "-" + month + "-" + day;
     },
     //处理1位01---取消区间选择，取消时间转化
     date_long: function(n) {
