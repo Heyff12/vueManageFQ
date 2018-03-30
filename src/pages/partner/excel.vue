@@ -7,11 +7,11 @@
   
       <el-form label-width="100px" class="demo-ruleForm" ref="searchkey">
         <el-row :gutter="10">
-          <el-col :xs="24" :sm="24" :md="24" :lg="24">
+          <!-- <el-col :xs="24" :sm="24" :md="24" :lg="24">
             <el-form-item label-width="0">
               <el-button type="default" @click="download">下载文件模板</el-button>
             </el-form-item>
-          </el-col>
+          </el-col> -->
           <!-- <el-col :xs="24" :sm="24" :md="24" :lg="24">
               <el-upload class="upload-demo" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" drag :action="upload_url" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload" :data="muchData">
                 <i class="el-icon-upload"></i>
