@@ -19,11 +19,13 @@
               </el-upload>
             </el-col> -->
           <el-col :xs="24" :sm="24" :md="24" :lg="24">
-            <el-form-item>
-              <form name="regis_pic" id="regis_pic" enctype="multipart/form-data">
-                <dd class="ipload">
-                  <input type="file" name="logo_url" size="32" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" class="file file_style" value="" v-on:change="upload_pic($event)" />上传文件
-                </dd>
+            <el-form-item label-width="0">
+              <form id="uploadForm" enctype="multipart/form-data">
+                <div class="ipload">
+                  <!-- <p>将文件拖到此处，或<em class="orange">点击上传</em></p> -->
+                  <p class="orange">点击上传</p>
+                  <input type="file" name="logo_url" size="32" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" class="file file_style" value="" v-on:change="uploadFile($event)" />
+                </div>
               </form>
             </el-form-item>
           </el-col>
@@ -49,28 +51,23 @@
     created: function() {},
     methods: {
       //上传图片
-      upload_pic: function(e) {
-        let file = e.target;
-        //console.log(e.target.files[0]);
-        let file_ajax = file.files[0];
-        console.log(file_ajax)
-        let file_name = file_ajax.name;
-        // var file_size = file_ajax.size;
-        // var file_type = file_ajax.type;
-        let formdata = new FormData(document.getElementById("regis_pic"));
-        let file0 = document.getElementById("regis_pic")[0].files[0];
-        console.log(file0);
-        formdata.append("file", file_name);
+      uploadFile: function(e) {
+        let formdata = new FormData(document.getElementById("uploadForm"));
+        let file = document.getElementById("uploadForm")[0].files[0];
+        // console.log(file);
+        formdata.append("file", file);
         formdata.append("partner_id", this.$route.params.partner_id);
-        console.log(formdata);
+        // console.log(formdata);
         this.$ajax_axios.ajax_post(
           this,
           this.upload_url,
           formdata,
           data_return => {
-  
-          }
-        );
+            this.$message({
+              message: '上传成功！',
+              type: 'success'
+            });
+          });
       },
       //下载
       download: function() {
@@ -117,5 +114,5 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" rel="stylesheet/less">
-  
+
 </style>

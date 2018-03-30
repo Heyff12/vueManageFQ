@@ -13,8 +13,11 @@ module.exports = {
         assetsSubDirectory: "static",
         assetsPublicPath: "/",
         proxyTable: {
+            // "/fenqi_mis/v1/api": {
+            //     target: "http://192.168.0.7:7020"
+            // }
             "/fenqi_mis/v1/api": {
-                target: "http://192.168.0.7:7020"
+                target: "http://192.168.0.187:7020"
             }
         },
 

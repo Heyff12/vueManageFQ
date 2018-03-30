@@ -11,7 +11,8 @@
           </div>
           <el-menu default-active="1" class="el-menu-vertical-demo" :unique-opened="true" :router="true">
             <el-submenu index="1">
-              <template slot="title"><i class="icon_left icon_manage_w"></i>合作商信息管理</template>
+              <template slot="title"><i class="icon_left icon_manage_w"></i>合作商信息管理
+</template>
               <el-menu-item index="/partner_index">合作商信息</el-menu-item>
               <!-- <el-menu-item index="/partner_excel">批量导入EXCEL模板</el-menu-item> -->
               <el-menu-item index="/partner_region">大区责任人信息</el-menu-item>
@@ -419,17 +420,17 @@
   .orange {
     color: @orange;
   }
-
+  
   .success {
-    color:@success;
+    color: @success;
   }
-
+  
   .warn {
-    color:@warn;
+    color: @warn;
   }
-
+  
   .danger {
-    color:@danger;
+    color: @danger;
   }
   
   .border_red {
@@ -893,6 +894,39 @@
   
   /*图片上传*/
   
+  //文件上传
+  #uploadForm {
+    width: 300px;
+    height: 180px;
+    border: 1px dashed @element_bordercolor;
+    background: white;
+    padding: 0px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    p{
+      width: 100%;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      padding-top: 70px;
+    }
+    .ipload {
+      width: 100%;
+      height: 180px;
+      position: relative;
+      input {
+        width: 100%;
+        height:180px;
+        background: 0 0;
+        border: none;
+        opacity: 0;
+        position: absolute;
+        left: 0;
+        top: 0
+      }
+    }
+  }
+  
   .el_pic {
     width: 100%;
     position: relative;
@@ -970,8 +1004,6 @@
   }
   
   //*自定义组建样式---------------------左侧导航z-index:12------------------------------------------------------------------------------------------------*/
-
-  
   //自定义弹框样式bounced------------------------z-index: 1020;
   .bounced_my {
     width: 100%;
@@ -1118,20 +1150,21 @@
   //*elementUI样式调整---------------------------------------------------------------------------------------------------------------------*/
   //加载按钮
   .bigIcon {
-    .el-loading-spinner{
-      width:120px;
-      left:50%;
-      margin-left:-60px;
+    .el-loading-spinner {
+      width: 120px;
+      left: 50%;
+      margin-left: -60px;
       height: 120px;
       border-radius: 10px;
-      background:rgba(0, 0, 0, 0.6);
+      background: rgba(0, 0, 0, 0.6);
       padding-top: 23px;
       box-sizing: border-box;
     }
-    .el-loading-spinner i{
-      font-size:50px;
+    .el-loading-spinner i {
+      font-size: 50px;
     }
   }
+  
   //table边框火狐浏览器显示--兼容性处理
   table {
     border-collapse: separate; //保留边框
@@ -1154,13 +1187,6 @@
   .time_date_short .el-date-editor.el-input {
     width: 100%;
     min-width: 124px;
-  }
-  
-  //交易明细--左侧标题 显示灰色
-  .detail_page {
-    .el-form-item__label {
-      color: @grey;
-    }
   }
   
   //新信息框样式
