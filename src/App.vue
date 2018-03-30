@@ -6,7 +6,7 @@
         <header>
           <div class="nav_menu_logo">
             <router-link :to="{ name: 'home' }">
-              <img src="./img/logo.png" alt="分期管理系统"><br/> 分期管理系统
+              <img src="./img/logo.png" alt="好近分期管理系统"><br/> 好近分期管理系统
             </router-link>
           </div>
           <el-menu default-active="1" class="el-menu-vertical-demo" :unique-opened="true" :router="true">
