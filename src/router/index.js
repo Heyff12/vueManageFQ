@@ -5,6 +5,8 @@ const login = () =>
     import ("@/pages/login")
 const home = () =>
     import ("@/pages/home")
+const partner_index = () =>
+    import ("@/pages/partner"); //合作商信息管理--合作商信息
 const partner_region = () =>
     import ("@/pages/partner/region"); //合作商信息管理--大区责任人信息
 const partner_excel = () =>
@@ -23,11 +25,16 @@ export default new Router({
             path: "/",
             name: "home",
             component: home,
-            redirect: { name: "partner_excel" }
+            redirect: { name: "partner_index" }
         },
         //登录页
         { path: "/login", name: "login", meta: { auth: false }, component: login },
         //合作商信息管理
+        {
+            path: "/partner_index",
+            name: "partner_index",
+            component: partner_index
+        },
         {
             path: "/partner_excel",
             name: "partner_excel",

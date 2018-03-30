@@ -83,9 +83,9 @@ let crash_enlarge_format = (val, currency) => {
     return value;
 }
 
-//判断搜索项是否填写，填写则加入 请求的发送数据中
+//判断搜索项是否填写，填写则加入 请求的发送数据中 if_select是否是下拉菜单选项
 let searchPost = (val, key, data, if_select) => {
-    if (val.length <= 0) return false;
+    if (val.toString().length <= 0) return false;
     if (if_select) {
         data[key] = val
     } else {

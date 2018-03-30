@@ -12,7 +12,11 @@ module.exports = {
         // Paths
         assetsSubDirectory: "static",
         assetsPublicPath: "/",
-        proxyTable: {},
+        proxyTable: {
+            "/fenqi_mis/v1/api": {
+                target: "http://192.168.0.7:7020"
+            }
+        },
 
         // Various Dev Server settings
         host: "192.168.0.156", // can be overwritten by process.env.HOST
@@ -52,7 +56,7 @@ module.exports = {
         // Paths
         assetsRoot: path.resolve(__dirname, "../dist"),
         assetsSubDirectory: "static",
-        assetsPublicPath: isOnline ? qiNiuAssets : '/',
+        assetsPublicPath: isOnline ? qiNiuAssets : "/",
 
         /**
          * Source Maps
