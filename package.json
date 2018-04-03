@@ -5,7 +5,7 @@
     "author": "chujunfang <chujunfang@qfpay.com>",
     "private": true,
     "scripts": {
-        "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+        "dev": "webpack-dev-server --inline --progress  --public --config build/webpack.dev.conf.js",
         "start": "npm run dev",
         "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
         "e2e": "node test/e2e/runner.js",
@@ -15,7 +15,7 @@
         "build_online": "node build/build.js production"
     },
     "dependencies": {
-        "element-ui": "^2.2.2",
+        "element-ui": "^2.3.2",
         "vue": "^2.5.2",
         "vue-router": "^3.0.1",
         "vuex": "^3.0.1"
@@ -86,7 +86,7 @@
         "sinon-chai": "^2.8.0",
         "uglifyjs-webpack-plugin": "^1.1.1",
         "url-loader": "^0.5.8",
-        "vue-axios": "^2.0.2",
+        "vue-axios": "^2.1.1",
         "vue-loader": "^13.3.0",
         "vue-style-loader": "^3.0.1",
         "vue-template-compiler": "^2.5.2",
