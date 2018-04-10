@@ -39,41 +39,41 @@
                         <el-form-item label-width="0" class="t_c">
                             <el-button type="primary" @click="search_sub">查询</el-button>
                             <el-button type="info" @click="resetForm('searchkey')">重置</el-button>
-                            <!-- <el-button type="success" @click="addItem">新增</el-button> -->
+                            <el-button type="success" @click="addItem">新增</el-button>
                         </el-form-item>
                     </el-col>
                 </el-row>
             </el-form>
             <template>
-                        <el-table :data="list_now" border stripe style="width: 100%">
-                            <el-table-column prop="district_name" label="大区名称" resizable min-width="100px">
-                            </el-table-column>
-                            <el-table-column prop="store_id" label="门店编号" resizable min-width="100px">
-                            </el-table-column>
-                            <el-table-column prop="store_name" label="门店名称" resizable min-width="100px">
-                            </el-table-column>
-                            <el-table-column prop="store_address" label="门店详细地址" resizable min-width="120px">
-                            </el-table-column>
-                            <el-table-column prop="name" label="门店管理人姓名" resizable min-width="100px">
-                            </el-table-column>
-                            <el-table-column prop="idnumber" label="门店管理人身份证号" resizable min-width="120px">
-                            </el-table-column>
-                            <el-table-column prop="mobile" label="门店管理人手机号" resizable min-width="120px">
-                            </el-table-column>
-                            <el-table-column prop="update_time" label="更新时间" resizable min-width="130px">
-                            </el-table-column>
-                            <el-table-column prop="status" label="运行状态" resizable>
-                                <template slot-scope="scope">
-                                    <span v-if="scope.row.status==2"  class="warn">待激活</span>
-                                    <span v-else-if="scope.row.status==3" class="success">已激活</span>
-                                    <span v-else class="danger">已注销</span>
-</template>
+                <el-table :data="list_now" border stripe style="width: 100%">
+                    <el-table-column prop="district_name" label="大区名称" resizable min-width="100px">
+                    </el-table-column>
+                    <el-table-column prop="store_id" label="门店编号" resizable min-width="100px">
+                    </el-table-column>
+                    <el-table-column prop="store_name" label="门店名称" resizable min-width="100px">
+                    </el-table-column>
+                    <el-table-column prop="store_address" label="门店详细地址" resizable min-width="120px">
+                    </el-table-column>
+                    <el-table-column prop="name" label="门店管理人姓名" resizable min-width="100px">
+                    </el-table-column>
+                    <el-table-column prop="idnumber" label="门店管理人身份证号" resizable min-width="120px">
+                    </el-table-column>
+                    <el-table-column prop="mobile" label="门店管理人手机号" resizable min-width="120px">
+                    </el-table-column>
+                    <el-table-column prop="update_time" label="更新时间" resizable min-width="130px">
+                    </el-table-column>
+                    <el-table-column prop="status" label="运行状态" resizable>
+                        <template slot-scope="scope">
+                            <span v-if="scope.row.status==2"  class="warn">待激活</span>
+                            <span v-else-if="scope.row.status==3" class="success">已激活</span>
+                            <span v-else class="danger">已注销</span>
+                        </template>
                     </el-table-column>
                     <el-table-column label="操作" resizable min-width="100px">
-<!-- <template slot-scope="scope">
-    <el-button type="warning" @click="editItem(scope.row)" plain>
-        编辑</el-button>
-</template> -->
+                        <template slot-scope="scope">
+                            <el-button type="warning" @click="editItem(scope.row)" plain>
+                                编辑</el-button>
+                        </template>
                     </el-table-column>
                 </el-table>
             </template>
@@ -246,6 +246,7 @@ export default {
       //   this.editMan = val;
       this.editMan.store_name = val.store_name;
       this.editMan.store_id = val.store_id;
+      this.editMan.userid = val.userid;
       this.editMan.district_name = val.district_name;
       this.editMan.store_address = val.store_address;
       this.editMan.name = val.name;
@@ -266,7 +267,10 @@ export default {
     },
     //确认提交事件
     mendSure_post() {
-      let post_data = {};
+      let post_data = {
+          store_id:this.editMan.store_id,
+          userid:this.editMan.userid,
+      };
       mendPost(
         this.editMan.store_name,
         "store_name",
@@ -287,7 +291,7 @@ export default {
         this.editManCompare.store_address
       );
       let post_dataLen = Object.keys(post_data).length;
-      if (post_dataLen <= 0) {
+      if (post_dataLen <= 2) {
         this.$message({
           message: "当前信息尚无修改",
           type: "warning"
@@ -297,7 +301,7 @@ export default {
       this.$ajax_axios.ajax_post(
         this,
         this.edit_url,
-        this.post_data,
+        post_data,
         data_return => {
           this.dialogEdit = false; //关闭弹框
           this.get_list(); //刷新数据

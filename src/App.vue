@@ -1088,13 +1088,15 @@
         color: white;
         cursor: pointer;
         &.bounced_sure {
-          background-color: @grey_bg;
+          // background-color: @grey_bg;
+          background-color: @orange;
           &.bounced_sure_right {
             background-color: @orange;
           }
         }
         &.bounced_cancle {
-          background-color: @orange;
+          // background-color: @orange;
+          background-color: @grey_bg;
         }
         &.bounced_sub {
           width: 160px;
