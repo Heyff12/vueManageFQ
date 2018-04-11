@@ -144,20 +144,22 @@
                     <el-col :xs="24" :sm="24" :md="12" :lg="8">
                         <el-form-item label="大区名称：">
                             <el-select v-model="addMan.district_id" placeholder="">
-                                <el-option v-for="item in districtList" :label="item.name" :value="item.district_id" :key="item.district_id"></el-option>
+                                <el-option v-for="item in districtList" :label="item.district_name" :value="item.district_id" :key="item.district_id"></el-option>
                             </el-select>
                         </el-form-item>
                     </el-col>
-                    <el-col :xs="24" :sm="24" :md="12" :lg="8">
-                        <el-form-item label="门店名称：" prop="store_name">
-                            <el-input v-model.trim="addMan.store_name"></el-input>
-                        </el-form-item>
-                    </el-col>
-                    <el-col :xs="24" :sm="24" :md="12" :lg="8">
-                        <el-form-item label="门店地址：" prop="store_address">
-                            <el-input v-model.trim="addMan.store_address"></el-input>
-                        </el-form-item>
-                    </el-col>
+                    <template v-for="(item,index) in addMan.store_list">
+                        <el-col :xs="24" :sm="24" :md="12" :lg="8">
+                            <el-form-item label="门店名称：" :prop="'store_list.'+index+'.store_name'">
+                                <el-input v-model.trim="item.store_name"></el-input>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :xs="24" :sm="24" :md="12" :lg="8">
+                            <el-form-item label="门店地址：" :prop="'store_list.'+index+'.store_address'">
+                                <el-input v-model.trim="item.store_address"></el-input>
+                            </el-form-item>
+                        </el-col>
+                    </template>
                     <el-col :xs="24" :sm="24" :md="12" :lg="8">
                         <el-form-item label="门店管理人姓名：" prop="name">
                             <el-input v-model.trim="addMan.name"></el-input>
@@ -218,7 +220,7 @@ export default {
       list_url: "/fenqi_mis/v1/api/partner/store_mgr/list", //获取列表
       edit_url: "/fenqi_mis/v1/api/partner/store_mgr/modify", //修改
       add_url: "/fenqi_mis/v1/api/partner/store_mgr/append", //新增
-      district_url: "/fenqi_mis/v1/api/partner/district/pulldown_list", //大区列表
+      district_url: "/fenqi_mis/v1/api/partner/district_mgr/list", //大区列表
       editMan: {
         store_name: "",
         name: "",
@@ -239,25 +241,33 @@ export default {
       }, //单个负责人信息--初始比较值
       addMan: {
         district_id: "",
-        store_name: "",
-        store_address: "",
         name: "",
         idnumber: "",
         mobile: "",
+        store_list: [
+          {
+            store_name: "", // 必填
+            store_address: "" // 必填
+          }
+        ]
       }, //单个负责人信息
       addrules: {
-        store_name: test_chinese("门店名称", 0, 15, true, "blur"),
         name: test_chinese("门店管理人姓名", 0, 5, true, "blur"),
         idnumber: test_idnumber("门店管理人身份证号", true, "blur"),
-        store_address: test_chinese("门店地址", 0, 15, true, "blur"),
-        mobile: test_tel("门店管理人手机号", true, "blur")
+        mobile: test_tel("门店管理人手机号", true, "blur"),
+        store_list: [
+          {
+            store_name: test_chinese("门店名称", 0, 15, true, "blur"),
+            store_address: test_chinese("门店地址", 0, 15, true, "blur")
+          }
+        ]
       },
       pages_all: 0, //总信息数
       page_per: 20, //每页信息数
       page_now: 1, //当前页数
       pages: 1, //总页数
       list_now: [], //当前展示信息
-      districtList:[],//大区列表
+      districtList: [] //大区列表
     };
   },
   created: function() {
@@ -267,9 +277,13 @@ export default {
   methods: {
     //获取大区列表
     get_districtList: function() {
-      this.$ajax_axios.ajax_get(this, this.district_url, '', data_return => {
-        this.districtList = data_return.data;
-        this.addMan.district_id = data_return.data[0].district_id;
+      let postData = {
+        page: 0,
+        page_size: -1
+      };
+      this.$ajax_axios.ajax_get(this, this.district_url, postData, data_return => {
+        this.districtList = data_return.data.district_info;
+        this.addMan.district_id = data_return.data.district_info[0].district_id;
       });
     },
     //获取列表
@@ -306,8 +320,8 @@ export default {
     },
     //新增
     addItem() {
-        this.$refs['addMan'].resetFields();//重置
-        this.dialogAdd = true;
+      this.$refs["addMan"].resetFields(); //重置
+      this.dialogAdd = true;
     },
     //修改
     editItem(val) {
@@ -341,8 +355,8 @@ export default {
     //确认提交事件
     mendSure_post() {
       let post_data = {
-          store_id:this.editMan.store_id,
-          userid:this.editMan.userid,
+        store_id: this.editMan.store_id,
+        userid: this.editMan.userid
       };
       mendPost(
         this.editMan.store_name,

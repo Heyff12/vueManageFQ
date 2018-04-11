@@ -141,9 +141,9 @@
                             </el-select>
                         </el-form-item>
                     </el-col>
-                    <el-col :xs="24" :sm="24" :md="12" :lg="8">
-                        <el-form-item label="大区名称：" prop="district_name">
-                            <el-input v-model.trim="addMan.district_name"></el-input>
+                    <el-col :xs="24" :sm="24" :md="12" :lg="8" v-for="(item,index) in addMan.district_list" :key="index">
+                        <el-form-item label="大区名称：" :prop="'district_list.'+index+'.district_name'">
+                            <el-input v-model.trim="item.district_name"></el-input>
                         </el-form-item>
                     </el-col>
                     <el-col :xs="24" :sm="24" :md="12" :lg="8">
@@ -225,16 +225,20 @@ export default {
       }, //单个负责人信息--初始比较值
       addMan: {
         partner_id: "",
-        district_name: "",
         name: "",
         idnumber: "",
-        mobile: ""
+        mobile: "",
+        district_list: [
+            {"district_name": ""}
+        ] 
       }, //单个负责人信息
-      addrules: {
-        district_name: test_chinese("大区名称", 0, 15, true, "blur"),
+      addrules: {        
         name: test_chinese("大区负责人姓名", 0, 5, true, "blur"),
         idnumber: test_idnumber("大区负责人身份证号", true, "blur"),
-        mobile: test_tel("大区负责人手机号", true, "blur")
+        mobile: test_tel("大区负责人手机号", true, "blur"),
+        district_list:[
+            {district_name: test_chinese("大区名称", 0, 15, true, "blur")}
+        ],
       },
       pages_all: 0, //总信息数
       page_per: 20, //每页信息数
