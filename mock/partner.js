@@ -24,7 +24,11 @@ var partner_list = {
         }]
     }
 };
-Mock.mock(/fenqi_mis\/v1\/api\/partner\/district\/list/, "get", partner_list);
+Mock.mock(
+    /fenqi_mis\/v1\/api\/partner\/district_mgr\/list/,
+    "get",
+    partner_list
+);
 //大区责任人信息--修改
 var partner_edit = {
     respcd: "0000",
@@ -33,7 +37,7 @@ var partner_edit = {
     data: {}
 };
 // Mock.mock(
-//     /fenqi_mis\/v1\/api\/partner\/district\/modify/,
+//     /fenqi_mis\/v1\/api\/partner\/district_mgr\/modify/,
 //     "post",
 //     partner_edit
 // );

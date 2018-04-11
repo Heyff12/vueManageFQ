@@ -137,7 +137,7 @@
                     <el-col :xs="24" :sm="24" :md="12" :lg="8">
                         <el-form-item label="合作商名称：">
                             <el-select v-model="addMan.partner_id" placeholder="">
-                                <el-option v-for="item in partnerList" :label="item.name" :value="item.partner_id" :key="item.partner_id"></el-option>
+                                <el-option v-for="item in partnerList" :label="item.partner_name" :value="item.partner_id" :key="item.partner_id"></el-option>
                             </el-select>
                         </el-form-item>
                     </el-col>
@@ -203,10 +203,11 @@ export default {
         district_name: test_chinese("大区名称", 0, 15, false, "blur"),
         mobile: test_tel("大区负责人手机号", false, "blur")
       },
-      list_url: "/fenqi_mis/v1/api/partner/district/list", //获取列表
-      edit_url: "/fenqi_mis/v1/api/partner/district/modify", //修改
+      list_url: "/fenqi_mis/v1/api/partner/district_mgr/list", //获取列表
+      edit_url: "/fenqi_mis/v1/api/partner/district_mgr/modify", //修改
       add_url: "/fenqi_mis/v1/api/partner/district_mgr/append", //新增
-      partner_url: "/fenqi_mis/v1/api/partner/pulldown_list", //合作商列表
+      //   partner_url: "/fenqi_mis/v1/api/partner/pulldown_list", //合作商列表
+      partner_url: "/fenqi_mis/v1/api/partner/list", //合作商列表
       editMan: {
         district_name: "",
         name: "",
@@ -240,7 +241,7 @@ export default {
       page_now: 1, //当前页数
       pages: 1, //总页数
       list_now: [], //当前展示信息
-      partnerList: [], //合作商列表
+      partnerList: [] //合作商列表
     };
   },
   created: function() {
@@ -250,10 +251,19 @@ export default {
   methods: {
     //获取合作商列表
     get_partnerList: function() {
-      this.$ajax_axios.ajax_get(this, this.partner_url, '', data_return => {
-        this.partnerList = data_return.data;
-        this.addMan.partner_id = data_return.data[0].partner_id;
-      });
+      let postData = {
+        page: 0,
+        page_size: -1
+      };
+      this.$ajax_axios.ajax_get(
+        this,
+        this.partner_url,
+        postData,
+        data_return => {
+          this.partnerList = data_return.data.partner_info;
+          this.addMan.partner_id = data_return.data.partner_info[0].partner_id;
+        }
+      );
     },
     //获取列表
     get_list: function() {
@@ -289,8 +299,8 @@ export default {
     },
     //新增
     addItem() {
-        this.$refs['addMan'].resetFields();//重置
-        this.dialogAdd = true;
+      this.$refs["addMan"].resetFields(); //重置
+      this.dialogAdd = true;
     },
     //修改
     editItem(val) {
@@ -322,8 +332,8 @@ export default {
     //确认提交事件
     mendSure_post() {
       let post_data = {
-          district_id:this.editMan.district_id,
-          userid:this.editMan.userid,
+        district_id: this.editMan.district_id,
+        userid: this.editMan.userid
       };
       mendPost(
         this.editMan.district_name,
@@ -412,4 +422,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" rel="stylesheet/less">
+
 </style>
