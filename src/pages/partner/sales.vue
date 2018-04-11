@@ -6,22 +6,22 @@
         <div class="right_body">
             <el-form label-width="140px" class="demo-ruleForm" :model="searchkey" :rules="searchkey_rule" ref="searchkey">
                 <el-row :gutter="10">
-                    <el-col :xs="24" :sm="24" :md="12" :lg="8">
+                    <el-col :xs="24" :sm="24" :md="12" :lg="6">
                         <el-form-item label="门店名称：" prop="store_name">
                             <el-input v-model.trim="searchkey.store_name"></el-input>
                         </el-form-item>
                     </el-col>
-                    <el-col :xs="24" :sm="24" :md="12" :lg="8">
+                    <el-col :xs="24" :sm="24" :md="12" :lg="6">
                         <el-form-item label="门店销售员姓名：" prop="name">
                             <el-input v-model.trim="searchkey.name"></el-input>
                         </el-form-item>
                     </el-col>
-                    <el-col :xs="24" :sm="24" :md="12" :lg="8">
+                    <el-col :xs="24" :sm="24" :md="12" :lg="6">
                         <el-form-item label="门店销售员手机号：" prop="mobile">
                             <el-input v-model.trim="searchkey.mobile"></el-input>
                         </el-form-item>
                     </el-col>
-                    <el-col :xs="24" :sm="24" :md="12" :lg="8">
+                    <el-col :xs="24" :sm="24" :md="12" :lg="6">
                         <el-form-item label="运行状态：">
                             <el-select v-model="searchkey.status" placeholder="请选择运行状态">
                                 <el-option label="待激活" value="2"></el-option>
@@ -30,7 +30,7 @@
                             </el-select>
                         </el-form-item>
                     </el-col>
-                    <el-col :xs="24" :sm="24" :md="12" :lg="8">
+                    <el-col :xs="24" :sm="24" :md="12" :lg="6">
                         <el-form-item label-width="0" class="t_c">
                             <el-button type="primary" @click="search_sub">查询</el-button>
                             <el-button type="info" @click="resetForm('searchkey')">重置</el-button>

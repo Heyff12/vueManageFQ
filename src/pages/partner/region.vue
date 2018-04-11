@@ -6,27 +6,27 @@
         <div class="right_body">
             <el-form label-width="140px" class="demo-ruleForm" :model="searchkey" :rules="searchkey_rule" ref="searchkey">
                 <el-row :gutter="10">
-                    <el-col :xs="24" :sm="24" :md="12" :lg="8">
+                    <el-col :xs="24" :sm="24" :md="12" :lg="6">
                         <el-form-item label="合作商名称：" prop="partner_name">
                             <el-input v-model.trim="searchkey.partner_name"></el-input>
                         </el-form-item>
                     </el-col>
-                    <el-col :xs="24" :sm="24" :md="12" :lg="8">
+                    <el-col :xs="24" :sm="24" :md="12" :lg="6">
                         <el-form-item label="大区编号：" prop="district_id">
                             <el-input v-model.trim="searchkey.district_id"></el-input>
                         </el-form-item>
                     </el-col>
-                    <el-col :xs="24" :sm="24" :md="12" :lg="8">
+                    <el-col :xs="24" :sm="24" :md="12" :lg="6">
                         <el-form-item label="大区名称：" prop="district_name">
                             <el-input v-model.trim="searchkey.district_name"></el-input>
                         </el-form-item>
                     </el-col>
-                    <el-col :xs="24" :sm="24" :md="12" :lg="8">
+                    <el-col :xs="24" :sm="24" :md="12" :lg="6">
                         <el-form-item label="大区负责人手机号：" prop="mobile">
                             <el-input v-model.trim="searchkey.mobile"></el-input>
                         </el-form-item>
                     </el-col>
-                    <el-col :xs="24" :sm="24" :md="12" :lg="8">
+                    <el-col :xs="24" :sm="24" :md="12" :lg="6">
                         <el-form-item label="运行状态：">
                             <el-select v-model="searchkey.status" placeholder="请选择运行状态">
                                 <el-option label="待激活" value="2"></el-option>
@@ -35,7 +35,7 @@
                             </el-select>
                         </el-form-item>
                     </el-col>
-                    <el-col :xs="24" :sm="24" :md="12" :lg="8">
+                    <el-col :xs="24" :sm="24" :md="12" :lg="6">
                         <el-form-item label-width="0" class="t_c">
                             <el-button type="primary" @click="search_sub">查询</el-button>
                             <el-button type="info" @click="resetForm('searchkey')">重置</el-button>
@@ -130,6 +130,44 @@
                 <span class="bounced_button bounced_cancle"  @click="dialogEdit = false">取消</span>
             </p>
         </bounced>
+        <bounced :visible="dialogAdd" :newclass="big_bounced">
+            <span slot="header">新增大区负责人信息</span>
+            <el-form :model="addMan" :rules="addrules" ref="addMan" label-width="170px" class="demo-ruleForm">
+                <el-row :gutter="10">
+                    <el-col :xs="24" :sm="24" :md="12" :lg="8">
+                        <el-form-item label="合作商名称：">
+                            <el-select v-model="addMan.partner_id" placeholder="">
+                                <el-option v-for="item in partnerList" :label="item.name" :value="item.partner_id" :key="item.partner_id"></el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :xs="24" :sm="24" :md="12" :lg="8">
+                        <el-form-item label="大区名称：" prop="district_name">
+                            <el-input v-model.trim="addMan.district_name"></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :xs="24" :sm="24" :md="12" :lg="8">
+                        <el-form-item label="大区负责人姓名：" prop="name">
+                            <el-input v-model.trim="addMan.name"></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :xs="24" :sm="24" :md="12" :lg="8">
+                        <el-form-item label="大区负责人身份证号：" prop="idnumber">
+                            <el-input v-model.trim="addMan.idnumber"></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :xs="24" :sm="24" :md="12" :lg="8">
+                        <el-form-item label="大区负责人手机号：" prop="mobile">
+                            <el-input v-model.trim="addMan.mobile"></el-input>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+            </el-form>
+            <p slot="footer">
+                <span class="bounced_button bounced_sure" @click="addSure">确认</span>
+                <span class="bounced_button bounced_cancle"  @click="dialogAdd = false">取消</span>
+            </p>
+        </bounced>
     </div>
 </template>
 
@@ -150,6 +188,7 @@ export default {
   data() {
     return {
       dialogEdit: false, //编辑弹框默认不显示
+      dialogAdd: false, //新增弹框默认不显示
       big_bounced: "large_bounced", //注销弹框变大--样式
       searchkey: {
         partner_name: "",
@@ -166,6 +205,8 @@ export default {
       },
       list_url: "/fenqi_mis/v1/api/partner/district/list", //获取列表
       edit_url: "/fenqi_mis/v1/api/partner/district/modify", //修改
+      add_url: "/fenqi_mis/v1/api/partner/district_mgr/append", //新增
+      partner_url: "/fenqi_mis/v1/api/partner/pulldown_list", //合作商列表
       editMan: {
         district_name: "",
         name: "",
@@ -181,17 +222,39 @@ export default {
         name: "",
         idnumber: ""
       }, //单个负责人信息--初始比较值
+      addMan: {
+        partner_id: "",
+        district_name: "",
+        name: "",
+        idnumber: "",
+        mobile: ""
+      }, //单个负责人信息
+      addrules: {
+        district_name: test_chinese("大区名称", 0, 15, true, "blur"),
+        name: test_chinese("大区负责人姓名", 0, 5, true, "blur"),
+        idnumber: test_idnumber("大区负责人身份证号", true, "blur"),
+        mobile: test_tel("大区负责人手机号", true, "blur")
+      },
       pages_all: 0, //总信息数
       page_per: 20, //每页信息数
       page_now: 1, //当前页数
       pages: 1, //总页数
-      list_now: [] //当前展示信息
+      list_now: [], //当前展示信息
+      partnerList: [], //合作商列表
     };
   },
   created: function() {
+    this.get_partnerList(); //获取合作商列表
     this.get_list(); //获取列表
   },
   methods: {
+    //获取合作商列表
+    get_partnerList: function() {
+      this.$ajax_axios.ajax_get(this, this.partner_url, '', data_return => {
+        this.partnerList = data_return.data;
+        this.addMan.partner_id = data_return.data[0].partner_id;
+      });
+    },
     //获取列表
     get_list: function() {
       let _this = this;
@@ -225,7 +288,10 @@ export default {
       this.searchkey.status = "";
     },
     //新增
-    addItem() {},
+    addItem() {
+        this.$refs['addMan'].resetFields();//重置
+        this.dialogAdd = true;
+    },
     //修改
     editItem(val) {
       this.$refs["editMan"].resetFields(); //重置
@@ -296,6 +362,35 @@ export default {
         }
       );
     },
+    //确认新增--验证
+    addSure() {
+      this.$refs.addMan.validate(valid => {
+        if (valid) {
+          this.addSure_post();
+        } else {
+          return false;
+        }
+      });
+    },
+    //确认提交事件
+    addSure_post() {
+      let post_data = this.addMan;
+      this.$ajax_axios.ajax_post(
+        this,
+        this.add_url,
+        post_data,
+        data_return => {
+          this.dialogAdd = false; //关闭弹框
+          this.get_list(); //刷新数据
+        },
+        () => {
+          this.dialogAdd = false; //关闭弹框
+        },
+        () => {
+          this.dialogAdd = false; //关闭弹框
+        }
+      );
+    },
     //更改每页显示信息条数
     handleSizeChange(val) {
       let _this = this;
@@ -317,22 +412,4 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" rel="stylesheet/less">
-// h1.dialog_h1 {
-//     width: auto;
-//     display: block;
-//     text-align: conter;
-//     font-size: 18px;
-//     font-weight: bold;
-//     line-height: 30px;
-//     padding: 0;
-//     position: relative;
-//     top: -26px;
-//     position: relative;
-//     z-index: -1;
-// }
-// p.dialog_p {
-//     line-height: 35px;
-//     margin-top: 20px;
-//     text-align: center;
-// }
 </style>

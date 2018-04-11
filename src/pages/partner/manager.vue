@@ -6,27 +6,27 @@
         <div class="right_body">
             <el-form label-width="140px" class="demo-ruleForm" :model="searchkey" :rules="searchkey_rule" ref="searchkey">
                 <el-row :gutter="10">
-                    <el-col :xs="24" :sm="24" :md="12" :lg="8">
+                    <el-col :xs="24" :sm="24" :md="12" :lg="6">
                         <el-form-item label="大区名称：" prop="district_name">
                             <el-input v-model.trim="searchkey.district_name"></el-input>
                         </el-form-item>
                     </el-col>
-                    <el-col :xs="24" :sm="24" :md="12" :lg="8">
+                    <el-col :xs="24" :sm="24" :md="12" :lg="6">
                         <el-form-item label="门店编号：" prop="store_id">
                             <el-input v-model.trim="searchkey.store_id"></el-input>
                         </el-form-item>
                     </el-col>
-                    <el-col :xs="24" :sm="24" :md="12" :lg="8">
+                    <el-col :xs="24" :sm="24" :md="12" :lg="6">
                         <el-form-item label="门店名称：" prop="store_name">
                             <el-input v-model.trim="searchkey.store_name"></el-input>
                         </el-form-item>
                     </el-col>
-                    <el-col :xs="24" :sm="24" :md="12" :lg="8">
+                    <el-col :xs="24" :sm="24" :md="12" :lg="6">
                         <el-form-item label="门店管理人手机号：" prop="mobile">
                             <el-input v-model.trim="searchkey.mobile"></el-input>
                         </el-form-item>
                     </el-col>
-                    <el-col :xs="24" :sm="24" :md="12" :lg="8">
+                    <el-col :xs="24" :sm="24" :md="12" :lg="6">
                         <el-form-item label="运行状态：">
                             <el-select v-model="searchkey.status" placeholder="请选择运行状态">
                                 <el-option label="待激活" value="2"></el-option>
@@ -35,7 +35,7 @@
                             </el-select>
                         </el-form-item>
                     </el-col>
-                    <el-col :xs="24" :sm="24" :md="12" :lg="8">
+                    <el-col :xs="24" :sm="24" :md="12" :lg="6">
                         <el-form-item label-width="0" class="t_c">
                             <el-button type="primary" @click="search_sub">查询</el-button>
                             <el-button type="info" @click="resetForm('searchkey')">重置</el-button>
@@ -137,6 +137,49 @@
                 <span class="bounced_button bounced_cancle"  @click="dialogEdit = false">取消</span>
             </p>
         </bounced>
+        <bounced :visible="dialogAdd" :newclass="big_bounced">
+            <span slot="header">新增门店管理人信息</span>
+            <el-form :model="addMan" :rules="addrules" ref="addMan" label-width="170px" class="demo-ruleForm">
+                <el-row :gutter="10">
+                    <el-col :xs="24" :sm="24" :md="12" :lg="8">
+                        <el-form-item label="大区名称：">
+                            <el-select v-model="addMan.district_id" placeholder="">
+                                <el-option v-for="item in districtList" :label="item.name" :value="item.district_id" :key="item.district_id"></el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :xs="24" :sm="24" :md="12" :lg="8">
+                        <el-form-item label="门店名称：" prop="store_name">
+                            <el-input v-model.trim="addMan.store_name"></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :xs="24" :sm="24" :md="12" :lg="8">
+                        <el-form-item label="门店地址：" prop="store_address">
+                            <el-input v-model.trim="addMan.store_address"></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :xs="24" :sm="24" :md="12" :lg="8">
+                        <el-form-item label="门店管理人姓名：" prop="name">
+                            <el-input v-model.trim="addMan.name"></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :xs="24" :sm="24" :md="12" :lg="8">
+                        <el-form-item label="门店管理人身份证号：" prop="idnumber">
+                            <el-input v-model.trim="addMan.idnumber"></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :xs="24" :sm="24" :md="12" :lg="8">
+                        <el-form-item label="门店管理人手机号：" prop="mobile">
+                            <el-input v-model.trim="addMan.mobile"></el-input>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+            </el-form>
+            <p slot="footer">
+                <span class="bounced_button bounced_sure" @click="addSure">确认</span>
+                <span class="bounced_button bounced_cancle"  @click="dialogAdd = false">取消</span>
+            </p>
+        </bounced>
     </div>
 </template>
 
@@ -157,6 +200,7 @@ export default {
   data() {
     return {
       dialogEdit: false, //编辑弹框默认不显示
+      dialogAdd: false, //新增弹框默认不显示
       big_bounced: "large_bounced", //注销弹框变大--样式
       searchkey: {
         store_name: "",
@@ -173,6 +217,8 @@ export default {
       },
       list_url: "/fenqi_mis/v1/api/partner/store_mgr/list", //获取列表
       edit_url: "/fenqi_mis/v1/api/partner/store_mgr/modify", //修改
+      add_url: "/fenqi_mis/v1/api/partner/store_mgr/append", //新增
+      district_url: "/fenqi_mis/v1/api/partner/district/pulldown_list", //大区列表
       editMan: {
         store_name: "",
         name: "",
@@ -191,17 +237,41 @@ export default {
         idnumber: "",
         store_address: ""
       }, //单个负责人信息--初始比较值
+      addMan: {
+        district_id: "",
+        store_name: "",
+        store_address: "",
+        name: "",
+        idnumber: "",
+        mobile: "",
+      }, //单个负责人信息
+      addrules: {
+        store_name: test_chinese("门店名称", 0, 15, true, "blur"),
+        name: test_chinese("门店管理人姓名", 0, 5, true, "blur"),
+        idnumber: test_idnumber("门店管理人身份证号", true, "blur"),
+        store_address: test_chinese("门店地址", 0, 15, true, "blur"),
+        mobile: test_tel("门店管理人手机号", true, "blur")
+      },
       pages_all: 0, //总信息数
       page_per: 20, //每页信息数
       page_now: 1, //当前页数
       pages: 1, //总页数
-      list_now: [] //当前展示信息
+      list_now: [], //当前展示信息
+      districtList:[],//大区列表
     };
   },
   created: function() {
+    this.get_districtList(); //获取大区列表
     this.get_list(); //获取列表
   },
   methods: {
+    //获取大区列表
+    get_districtList: function() {
+      this.$ajax_axios.ajax_get(this, this.district_url, '', data_return => {
+        this.districtList = data_return.data;
+        this.addMan.district_id = data_return.data[0].district_id;
+      });
+    },
     //获取列表
     get_list: function() {
       let _this = this;
@@ -235,7 +305,10 @@ export default {
       this.searchkey.status = "";
     },
     //新增
-    addItem() {},
+    addItem() {
+        this.$refs['addMan'].resetFields();//重置
+        this.dialogAdd = true;
+    },
     //修改
     editItem(val) {
       this.$refs["editMan"].resetFields(); //重置
@@ -311,6 +384,35 @@ export default {
         },
         () => {
           this.dialogEdit = false; //关闭弹框
+        }
+      );
+    },
+    //确认新增--验证
+    addSure() {
+      this.$refs.addMan.validate(valid => {
+        if (valid) {
+          this.addSure_post();
+        } else {
+          return false;
+        }
+      });
+    },
+    //确认提交事件
+    addSure_post() {
+      let post_data = this.addMan;
+      this.$ajax_axios.ajax_post(
+        this,
+        this.add_url,
+        post_data,
+        data_return => {
+          this.dialogAdd = false; //关闭弹框
+          this.get_list(); //刷新数据
+        },
+        () => {
+          this.dialogAdd = false; //关闭弹框
+        },
+        () => {
+          this.dialogAdd = false; //关闭弹框
         }
       );
     },
