@@ -232,6 +232,9 @@
       width: 100%;
       min-width: 193px;
     }
+    .el-form-item {
+      margin-bottom: 30px;
+    }
     // 输入成功的边框
     .el-form-item.is-success .el-input__inner,
     .el-form-item.is-success .el-input__inner:focus,

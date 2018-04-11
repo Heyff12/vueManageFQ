@@ -6,27 +6,27 @@
         <div class="right_body">
             <el-form label-width="140px" class="demo-ruleForm" :model="searchkey" :rules="searchkey_rule" ref="searchkey">
                 <el-row :gutter="10">
-                    <el-col :xs="24" :sm="24" :md="12" :lg="6">
+                    <el-col :xs="24" :sm="24" :md="12" :lg="8">
                         <el-form-item label="合作商名称：" prop="partner_name">
                             <el-input v-model.trim="searchkey.partner_name"></el-input>
                         </el-form-item>
                     </el-col>
-                    <el-col :xs="24" :sm="24" :md="12" :lg="6">
+                    <el-col :xs="24" :sm="24" :md="12" :lg="8">
                         <el-form-item label="大区编号：" prop="district_id">
                             <el-input v-model.trim="searchkey.district_id"></el-input>
                         </el-form-item>
                     </el-col>
-                    <el-col :xs="24" :sm="24" :md="12" :lg="6">
+                    <el-col :xs="24" :sm="24" :md="12" :lg="8">
                         <el-form-item label="大区名称：" prop="district_name">
                             <el-input v-model.trim="searchkey.district_name"></el-input>
                         </el-form-item>
                     </el-col>
-                    <el-col :xs="24" :sm="24" :md="12" :lg="6">
+                    <el-col :xs="24" :sm="24" :md="12" :lg="8">
                         <el-form-item label="大区负责人手机号：" prop="mobile">
                             <el-input v-model.trim="searchkey.mobile"></el-input>
                         </el-form-item>
                     </el-col>
-                    <el-col :xs="24" :sm="24" :md="12" :lg="6">
+                    <el-col :xs="24" :sm="24" :md="12" :lg="8">
                         <el-form-item label="运行状态：">
                             <el-select v-model="searchkey.status" placeholder="请选择运行状态">
                                 <el-option label="待激活" value="2"></el-option>
@@ -35,7 +35,7 @@
                             </el-select>
                         </el-form-item>
                     </el-col>
-                    <el-col :xs="24" :sm="24" :md="12" :lg="6">
+                    <el-col :xs="24" :sm="24" :md="12" :lg="8">
                         <el-form-item label-width="0" class="t_c">
                             <el-button type="primary" @click="search_sub">查询</el-button>
                             <el-button type="info" @click="resetForm('searchkey')">重置</el-button>
