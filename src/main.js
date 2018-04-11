@@ -38,16 +38,16 @@ router.beforeEach(({ meta, path }, from, next) => {
     next()
 });
 //请求响应拦截，未登录返回登录页---------------------------------------------------------------------------------------------
-// axios.interceptors.response.use(data => {
-//     if (data.body.respcd == 1001) {
-//         router.replace({
-//             path: "/login"
-//         });
-//         return false;
-//     } else {
-//         return data;
-//     }
-// });
+axios.interceptors.response.use(data => {
+    if (data.data.respcd == 1001) {
+        router.replace({
+            path: "/login"
+        });
+        return false;
+    } else {
+        return data;
+    }
+});
 
 /* eslint-disable no-new */
 new Vue({
