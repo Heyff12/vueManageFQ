@@ -202,21 +202,11 @@ export default {
             idnumber: "",
             mobile: "",
             name: ""
-          },
-          {
-            idnumber: "",
-            mobile: "",
-            name: ""
           }
         ]
       }, //单个负责人信息
       addrules: {
         opuser_list: [
-          {
-            name: test_chinese("门店销售员姓名", 0, 5, true, "blur"),
-            idnumber: test_idnumber("门店销售员身份证号", true, "blur"),
-            mobile: test_tel("门店销售员手机号", true, "blur")
-          },
           {
             name: test_chinese("门店销售员姓名", 0, 5, true, "blur"),
             idnumber: test_idnumber("门店销售员身份证号", true, "blur"),

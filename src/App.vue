@@ -9,10 +9,9 @@
               <img src="./img/logo.png" alt="好近分期管理系统"><br/> 好近分期管理系统
             </router-link>
           </div>
-          <el-menu default-active="1" class="el-menu-vertical-demo" :unique-opened="true" :router="true">
+          <el-menu :default-active="nowPathSel" class="el-menu-vertical-demo" :unique-opened="true" :router="true">
             <el-submenu index="1">
-              <template slot="title"><i class="icon_left icon_manage_w"></i>合作商信息管理
-</template>
+              <template slot="title"><i class="icon_left icon_manage_w"></i>合作商信息管理</template>
               <el-menu-item index="/partner_index">合作商信息</el-menu-item>
               <!-- <el-menu-item index="/partner_excel">批量导入EXCEL模板</el-menu-item> -->
               <el-menu-item index="/partner_region">大区责任人信息</el-menu-item>
@@ -88,7 +87,11 @@
         ifSafari: false, //苹果浏览器，清楚th.gutter
         quit_url: '/fenqi_mis/v1/api/user/logout', //退出登录
         userInfo_url: '/fenqi_mis/v1/api/user/info', //获取用户信息
+        nowPathSel:'/partner_index',//当前选中的path
       }
+    },
+    watch:{
+      '$route': 'fetchPath'
     },
     computed: {
       login: function() {
@@ -106,6 +109,15 @@
       }
     },
     methods: {
+      //获取当前路由
+      fetchPath(){
+        let path = this.$route.path;
+        if(path.indexOf('partner_excel')==-1){
+          this.nowPathSel = path;
+        }else{
+          this.nowPathSel = '/partner_index';
+        }
+      },
       //获取特定渠道的基本信息
       get_info: function() {
         var _this = this;
