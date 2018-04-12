@@ -180,7 +180,7 @@ export default {
         mobile: test_tel("门店销售员手机号", false, "blur")
       },
       list_url: "/fenqi_mis/v1/api/partner/opuser/list", //获取列表
-      edit_url: "/fenqi/v1/api/partner/opuser/modify", //修改
+      edit_url: "/fenqi_mis/v1/api/partner/opuser/modify", //修改
       add_url: "/fenqi_mis/v1/api/partner/opuser/append", //新增
       store_url: "/fenqi_mis/v1/api/partner/store_mgr/list", //门店列表
       editMan: {
