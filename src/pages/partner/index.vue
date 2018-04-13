@@ -150,7 +150,7 @@ export default {
         partner_name: "",
         status: "",
         s_join_dtm: "",
-        e_join_dtm: ""
+        e_join_dtm: "",
       },
       searchkey_rule: {
         partner_name: test_chinese("合作商名称", 0, 15, false, "blur"),
@@ -257,6 +257,7 @@ export default {
     //重置
     resetForm: function(formName) {
       this.$refs[formName].resetFields();
+      this.dateRange = "";
       this.searchkey.status = "";
     },
     //批量导入

@@ -14,6 +14,7 @@ var partner_list = {
         "district_info|50-80": [{
             partner_name: Random.cword(10),
             "district_id|+10": 456,
+            "userid|+10": 456777,
             district_name: Random.cword(10),
             name: Random.cname(),
             mobile: /^1[0-9]{10}$/,
@@ -23,7 +24,11 @@ var partner_list = {
         }]
     }
 };
-Mock.mock(/fenqi_mis\/v1\/api\/partner\/district\/list/, "get", partner_list);
+Mock.mock(
+    /fenqi_mis\/v1\/api\/partner\/district_mgr\/list/,
+    "get",
+    partner_list
+);
 //大区责任人信息--修改
 var partner_edit = {
     respcd: "0000",
@@ -31,11 +36,11 @@ var partner_edit = {
     resperr: "",
     data: {}
 };
-Mock.mock(
-    /qudao_mis\/v1\/api\/partner\/district\/modify/,
-    "post",
-    partner_edit
-);
+// Mock.mock(
+//     /fenqi_mis\/v1\/api\/partner\/district_mgr\/modify/,
+//     "post",
+//     partner_edit
+// );
 //门店负责人信息
 var manager_list = {
     respcd: "0000",
@@ -50,6 +55,7 @@ var manager_list = {
             district_name: Random.cword(10),
             store_name: Random.cword(10),
             "store_id|+10": 456,
+            "userid|+10": 456777,
             store_address: Random.cword(10),
             name: Random.cname(),
             mobile: /^1[0-9]{10}$/,
@@ -67,11 +73,11 @@ var manager_edit = {
     resperr: "",
     data: {}
 };
-Mock.mock(
-    /qudao_mis\/v1\/api\/partner\/store_mgr\/modify/,
-    "post",
-    manager_edit
-);
+// Mock.mock(
+//     /fenqi_mis\/v1\/api\/partner\/store_mgr\/modify/,
+//     "post",
+//     manager_edit
+// );
 //门店销售信息
 var sale_list = {
     respcd: "0000",
@@ -82,6 +88,7 @@ var sale_list = {
         page: 1,
         page_size: 10,
         "opuser_info|50-80": [{
+            "userid|+10": 456777,
             store_name: Random.cword(10),
             name: Random.cname(),
             mobile: /^1[0-9]{10}$/,
@@ -99,7 +106,7 @@ var sale_edit = {
     resperr: "",
     data: {}
 };
-Mock.mock(/qudao_mis\/v1\/api\/partner\/opuser\/modify/, "post", sale_edit);
+// Mock.mock(/fenqi_mis\/v1\/api\/partner\/opuser\/modify/, "post", sale_edit);
 //合作商基本信息
 var partnerBig_list = {
     respcd: "0000",
@@ -118,3 +125,52 @@ var partnerBig_list = {
     }
 };
 Mock.mock(/fenqi_mis\/v1\/api\/partner\/list/, "get", partnerBig_list);
+
+
+//获取门店列表
+var storelist = {
+    respcd: "0000",
+    respmsg: "OK",
+    resperr: "",
+    "data|8-12": [{
+        name: Random.cword(10), //门店名称
+        "store_id|+1": 111 //门店 id
+    }]
+};
+Mock.mock(
+    /fenqi_mis\/v1\/api\/partner\/store\/pulldown_list/,
+    "get",
+    storelist
+);
+
+//获取大区列表
+var districtlist = {
+    respcd: "0000",
+    respmsg: "OK",
+    resperr: "",
+    "data|8-12": [{
+        name: Random.cword(10), //门店名称
+        "district_id|+1": 111 //门店 id
+    }]
+};
+Mock.mock(
+    /fenqi_mis\/v1\/api\/partner\/district\/pulldown_list/,
+    "get",
+    districtlist
+);
+
+//获取合作商列表
+var partnerlist = {
+    respcd: "0000",
+    respmsg: "OK",
+    resperr: "",
+    "data|8-12": [{
+        name: Random.cword(10), //门店名称
+        "partner_id|+1": 111 //门店 id
+    }]
+};
+Mock.mock(
+    /fenqi_mis\/v1\/api\/partner\/pulldown_list/,
+    "get",
+    partnerlist
+);
