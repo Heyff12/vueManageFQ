@@ -137,7 +137,7 @@
                     <el-col :xs="24" :sm="24" :md="12" :lg="8">
                         <el-form-item label="合作商名称：">
                             <el-select v-model="addMan.partner_id" placeholder="">
-                                <el-option v-for="item in partnerList" :label="item.partner_name" :value="item.partner_id"></el-option>
+                                <el-option v-for="item in partnerList" :label="item.partner_name" :value="item.partner_id" :key="item.partner_id"></el-option>
                             </el-select>
                         </el-form-item>
                     </el-col>
