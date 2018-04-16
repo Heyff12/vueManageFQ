@@ -15,8 +15,6 @@ const partner_manager = () =>
     import ("@/pages/partner/manager"); //合作商信息管理--门店管理人信息
 const partner_sales = () =>
     import ("@/pages/partner/sales"); //合作商信息管理--门店销售员信息
-const test = () =>
-    import ("@/pages/partner/test"); //测试文件
 
 Vue.use(Router)
 
@@ -31,8 +29,6 @@ export default new Router({
         },
         //登录页
         { path: "/login", name: "login", meta: { auth: false }, component: login },
-        //测试页
-        { path: "/test", name: "test", meta: { auth: false }, component: test },
         //合作商信息管理
         {
             path: "/partner_index",
