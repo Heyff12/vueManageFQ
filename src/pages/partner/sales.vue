@@ -176,7 +176,7 @@ export default {
       },
       searchkey_rule: {
         store_name: test_chinese("门店名称", 0, 15, false, "blur"),
-        name: test_chinese("门店销售员姓名", 0, 5, false, "blur"),
+        name: test_chinese("门店销售员姓名", 0, 10, false, "blur"),
         mobile: test_tel("门店销售员手机号", false, "blur")
       },
       list_url: "/fenqi_mis/v1/api/partner/opuser/list", //获取列表
@@ -188,7 +188,7 @@ export default {
         idnumber: ""
       }, //单个负责人信息
       rules: {
-        name: test_chinese("门店销售员姓名", 0, 5, true, "blur"),
+        name: test_chinese("门店销售员姓名", 0, 10, true, "blur"),
         idnumber: test_idnumber("门店销售员身份证号", true, "blur")
       },
       editManCompare: {
@@ -208,7 +208,7 @@ export default {
       addrules: {
         opuser_list: [
           {
-            name: test_chinese("门店销售员姓名", 0, 5, true, "blur"),
+            name: test_chinese("门店销售员姓名", 0, 10, true, "blur"),
             idnumber: test_idnumber("门店销售员身份证号", true, "blur"),
             mobile: test_tel("门店销售员手机号", true, "blur")
           }

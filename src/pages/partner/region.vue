@@ -215,7 +215,7 @@ export default {
       }, //单个负责人信息
       rules: {
         district_name: test_chinese("大区名称", 0, 15, true, "blur"),
-        name: test_chinese("大区负责人姓名", 0, 5, true, "blur"),
+        name: test_chinese("大区负责人姓名", 0, 10, true, "blur"),
         idnumber: test_idnumber("大区负责人身份证号", true, "blur")
       },
       editManCompare: {
@@ -233,7 +233,7 @@ export default {
         ] 
       }, //单个负责人信息
       addrules: {        
-        name: test_chinese("大区负责人姓名", 0, 5, true, "blur"),
+        name: test_chinese("大区负责人姓名", 0, 10, true, "blur"),
         idnumber: test_idnumber("大区负责人身份证号", true, "blur"),
         mobile: test_tel("大区负责人手机号", true, "blur"),
         district_list:[
