@@ -77,10 +77,10 @@
                 <el-row :gutter="10">
                     <el-col :xs="24" :sm="24" :md="12" :lg="8">
                         <el-form-item label="门店名称：">
-                            <el-select v-model="editMan.store_id" placeholder="">
+                            <!-- <el-select v-model="editMan.store_id" placeholder="">
                                 <el-option v-for="item in storeListEdit" :label="item.store_name" :value="item.store_id" :key="item.store_id"></el-option>
-                            </el-select>
-                            <!-- <el-input v-model.trim="editMan.store_name" :disabled="true"></el-input> -->
+                            </el-select> -->
+                            <el-input v-model.trim="editMan.store_name" :disabled="true"></el-input>
                         </el-form-item>
                     </el-col>
                     <el-col :xs="24" :sm="24" :md="12" :lg="8">

@@ -88,10 +88,10 @@
                 <el-row :gutter="10">
                     <el-col :xs="24" :sm="24" :md="12" :lg="8">
                         <el-form-item label="大区名称：">
-                            <el-select v-model="editMan.district_id" placeholder="">
+                            <!-- <el-select v-model="editMan.district_id" placeholder="">
                                 <el-option v-for="item in districtListEdit" :label="item.district_name" :value="item.district_id" :key="item.district_id"></el-option>
-                            </el-select>
-                            <!-- <el-input v-model.trim="editMan.district_name" :disabled="true"></el-input> -->
+                            </el-select> -->
+                            <el-input v-model.trim="editMan.district_name" :disabled="true"></el-input>
                         </el-form-item>
                     </el-col>
                     <el-col :xs="24" :sm="24" :md="12" :lg="8">
