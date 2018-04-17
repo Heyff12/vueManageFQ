@@ -133,7 +133,8 @@ import {
   test_number,
   test_chinese,
   test_tel,
-  test_idnumber
+  test_idnumber,
+  test_any
 } from "@/method/yanzheng";
 import { searchPost, mendPost } from "@/method/util";
 export default {
@@ -166,9 +167,9 @@ export default {
       }, //单个负责人信息
       rules: {
         store_name: test_chinese("门店名称", 0, 15, true, "blur"),
-        name: test_chinese("门店管理人姓名", 0, 5, true, "blur"),
+        name: test_chinese("门店管理人姓名", 0, 10, true, "blur"),
         idnumber: test_idnumber("门店管理人身份证号", true, "blur"),
-        store_address: test_chinese("门店地址", 0, 15, true, "blur")
+        store_address: test_any("门店地址", 0, 50, true, "blur")
       },
       editManCompare: {
         store_name: "",
