@@ -77,7 +77,10 @@
                 <el-row :gutter="10">
                     <el-col :xs="24" :sm="24" :md="12" :lg="8">
                         <el-form-item label="门店名称：">
-                            <el-input v-model.trim="editMan.store_name" :disabled="true"></el-input>
+                            <el-select v-model="editMan.store_id" placeholder="">
+                                <el-option v-for="item in storeListEdit" :label="item.store_name" :value="item.store_id" :key="item.store_id"></el-option>
+                            </el-select>
+                            <!-- <el-input v-model.trim="editMan.store_name" :disabled="true"></el-input> -->
                         </el-form-item>
                     </el-col>
                     <el-col :xs="24" :sm="24" :md="12" :lg="8">
@@ -184,6 +187,7 @@ export default {
       add_url: "/fenqi_mis/v1/api/partner/opuser/append", //新增
       store_url: "/fenqi_mis/v1/api/partner/store_mgr/list", //门店列表
       editMan: {
+        store_id: "",
         name: "",
         idnumber: ""
       }, //单个负责人信息
@@ -192,6 +196,7 @@ export default {
         idnumber: test_idnumber("门店销售员身份证号", true, "blur")
       },
       editManCompare: {
+        store_id: "",
         name: "",
         idnumber: ""
       }, //单个负责人信息--初始比较值
@@ -219,7 +224,8 @@ export default {
       page_now: 1, //当前页数
       pages: 1, //总页数
       list_now: [], //当前展示信息
-      storeList: [] //门店列表
+      storeList: [], //门店列表
+      storeListEdit: [], //门店列表--编辑用
     };
   },
   created: function() {
@@ -236,6 +242,7 @@ export default {
       this.$ajax_axios.ajax_get(this, this.store_url, postData, data_return => {
         this.storeList = data_return.data.store_info;
         this.addMan.store_id = data_return.data.store_info[0].store_id;
+        this.storeListEdit = data_return.data.store_info;
       });
     },
     //获取列表
@@ -279,12 +286,14 @@ export default {
       this.$refs["editMan"].resetFields(); //重置
       this.editManCompare.name = val.name;
       this.editManCompare.idnumber = val.idnumber;
+      this.editManCompare.store_id = val.store_id;
       //   this.editMan = val;
       this.editMan.store_name = val.store_name;
       this.editMan.userid = val.userid;
       this.editMan.name = val.name;
       this.editMan.idnumber = val.idnumber;
       this.editMan.mobile = val.mobile;
+      this.editMan.store_id = val.store_id;
       this.editMan.status = val.status.toString();
       this.dialogEdit = true;
     },
@@ -315,6 +324,7 @@ export default {
         post_data,
         this.editManCompare.idnumber
       );
+      mendPost(this.editMan.store_id, "store_id", post_data, this.editManCompare.store_id);
       let post_dataLen = Object.keys(post_data).length;
       if (post_dataLen <= 1) {
         this.$message({

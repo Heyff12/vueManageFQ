@@ -89,7 +89,12 @@ let test_any = function(lablename, min, max, require, type) {
 };
 //身份证号码
 let test_idnumber = function(lablename, require, type) {
-    var reg = [{ required: require, pattern: /(^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$)|(^[1-9]\d{5}\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{2}$)/, message: "请输入" + lablename, trigger: type }];
+    var reg = [{
+        required: require,
+        pattern: /(^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$)|(^[1-9]\d{5}\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{2}$)/,
+        message: "请输入" + lablename,
+        trigger: type
+    }];
     return reg;
 };
 //验证金额，整数部分9位，小数部分2位--验证规则中使用
