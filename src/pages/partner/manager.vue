@@ -88,6 +88,9 @@
                 <el-row :gutter="10">
                     <el-col :xs="24" :sm="24" :md="12" :lg="8">
                         <el-form-item label="大区名称：">
+                            <!-- <el-select v-model="editMan.district_id" placeholder="">
+                                <el-option v-for="item in districtListEdit" :label="item.district_name" :value="item.district_id" :key="item.district_id"></el-option>
+                            </el-select> -->
                             <el-input v-model.trim="editMan.district_name" :disabled="true"></el-input>
                         </el-form-item>
                     </el-col>
@@ -191,7 +194,8 @@ import {
   test_number,
   test_chinese,
   test_tel,
-  test_idnumber
+  test_idnumber,
+  test_any
 } from "@/method/yanzheng";
 import { searchPost, mendPost } from "@/method/util";
 export default {
@@ -222,6 +226,7 @@ export default {
       add_url: "/fenqi_mis/v1/api/partner/store_mgr/append", //新增
       district_url: "/fenqi_mis/v1/api/partner/district_mgr/list", //大区列表
       editMan: {
+        district_id: "",
         store_name: "",
         name: "",
         idnumber: "",
@@ -229,11 +234,12 @@ export default {
       }, //单个负责人信息
       rules: {
         store_name: test_chinese("门店名称", 0, 15, true, "blur"),
-        name: test_chinese("门店管理人姓名", 0, 5, true, "blur"),
+        name: test_chinese("门店管理人姓名", 0, 10, true, "blur"),
         idnumber: test_idnumber("门店管理人身份证号", true, "blur"),
-        store_address: test_chinese("门店地址", 0, 15, true, "blur")
+        store_address: test_any("门店地址", 0, 50, true, "blur")
       },
       editManCompare: {
+        district_id: "",
         store_name: "",
         name: "",
         idnumber: "",
@@ -252,13 +258,13 @@ export default {
         ]
       }, //单个负责人信息
       addrules: {
-        name: test_chinese("门店管理人姓名", 0, 5, true, "blur"),
+        name: test_chinese("门店管理人姓名", 0, 10, true, "blur"),
         idnumber: test_idnumber("门店管理人身份证号", true, "blur"),
         mobile: test_tel("门店管理人手机号", true, "blur"),
         store_list: [
           {
             store_name: test_chinese("门店名称", 0, 15, true, "blur"),
-            store_address: test_chinese("门店地址", 0, 15, true, "blur")
+            store_address: test_any("门店地址", 0, 50, true, "blur")
           }
         ]
       },
@@ -267,7 +273,8 @@ export default {
       page_now: 1, //当前页数
       pages: 1, //总页数
       list_now: [], //当前展示信息
-      districtList: [] //大区列表
+      districtList: [], //大区列表
+      districtListEdit: [], //大区列表--编辑
     };
   },
   created: function() {
@@ -284,6 +291,7 @@ export default {
       this.$ajax_axios.ajax_get(this, this.district_url, postData, data_return => {
         this.districtList = data_return.data.district_info;
         this.addMan.district_id = data_return.data.district_info[0].district_id;
+        this.districtListEdit = data_return.data.district_info;
       });
     },
     //获取列表
@@ -330,6 +338,7 @@ export default {
       this.editManCompare.name = val.name;
       this.editManCompare.idnumber = val.idnumber;
       this.editManCompare.store_address = val.store_address;
+      this.editManCompare.district_id = val.district_id;
       //   this.editMan = val;
       this.editMan.store_name = val.store_name;
       this.editMan.store_id = val.store_id;
@@ -340,6 +349,7 @@ export default {
       this.editMan.idnumber = val.idnumber;
       this.editMan.mobile = val.mobile;
       this.editMan.status = val.status.toString();
+      this.editMan.district_id = val.district_id;
       this.dialogEdit = true;
     },
     //确认修改--验证
@@ -377,6 +387,7 @@ export default {
         post_data,
         this.editManCompare.store_address
       );
+      mendPost(this.editMan.district_id, "district_id", post_data, this.editManCompare.district_id);
       let post_dataLen = Object.keys(post_data).length;
       if (post_dataLen <= 2) {
         this.$message({
