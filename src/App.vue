@@ -18,6 +18,10 @@
               <el-menu-item index="/partner_manager">门店管理人信息</el-menu-item>
               <el-menu-item index="/partner_sales">门店销售员信息</el-menu-item>
             </el-submenu>
+            <el-submenu index="2">
+              <template slot="title"><i class="icon_left icon_manage_w"></i>订单查询</template>
+              <el-menu-item index="/orderQuery/loans_query">商户贷订单查询</el-menu-item>
+            </el-submenu>
           </el-menu>
           <div class="clearfix"></div>
           <!-- <div class="head_foot">Copyright <span class="orange"> © 2018</span></div> -->
@@ -74,7 +78,7 @@
         </p>
       </bounced> -->
     </div>
-    
+
   </div>
 </template>
 
@@ -98,7 +102,7 @@
         let if_login = this.$store.state.if_login;
         let name = this.$store.state.username;
         if (!if_login && !name) { //不在登录页，用户名不存在
-          this.get_info(); //获取基础信息  
+          this.get_info(); //获取基础信息
         }
         return this.$store.state.if_login
       }
@@ -170,7 +174,7 @@
     margin: 0;
     padding: 0;
   }
-  
+
   h1,
   h2,
   h3,
@@ -179,30 +183,30 @@
   h6 {
     font-size: 100%;
   }
-  
+
   ul,
   dl,
   ol {
     list-style: none;
   }
-  
+
   img,
   fieldset,
   input[type="submit"] {
     border: 0 none;
   }
-  
+
   img {
     display: inline-block;
     overflow: hidden;
     vertical-align: top;
   }
-  
+
   table {
     border-collapse: collapse;
     border-spacing: 0;
   }
-  
+
   button,
   input[type="button"] {
     cursor: pointer;
@@ -210,20 +214,20 @@
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     tap-highlight-color: rgba(0, 0, 0, 0);
   }
-  
+
   textarea {
     word-wrap: break-word;
     resize: none;
   }
-  
-  
+
+
   /* word-wrap for opera, resize for webkit */
-  
+
   menu {
     margin: 0;
     padding: 0;
   }
-  
+
   body {
     //-webkit-user-select: none;
     -webkit-text-size-adjust: none;
@@ -255,27 +259,27 @@
       border-color: @border_color;
     }
   }
-  
+
   input[type="number"] {
     -webkit-user-select: text;
   }
-  
+
   a,
   button,
   input,
   img {
     -webkit-touch-callout: none;
   }
-  
-  
+
+
   /* 1.ios 长按时不触发系统的菜单 2.禁止长按时下载图片 */
-  
+
   input,
   select,
   textarea {
     outline: none;
   }
-  
+
   a,
   button,
   input,
@@ -284,7 +288,7 @@
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     tap-highlight-color: rgba(0, 0, 0, 0);
   }
-  
+
   a,
   a:link,
   a:visited,
@@ -293,7 +297,7 @@
     color: @black;
     cursor: pointer;
   }
-  
+
   @media all and (-webkit-transform-3d) {
     /* android4.0+ ios4+ 恢复按钮被点击时产生的效果 */
     a,
@@ -305,29 +309,29 @@
       tap-highlight-color: rgba(0, 0, 0, 0);
     }
   }
-  
+
   textarea {
     /* 消除ios内阴影 */
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
   }
-  
+
   a {
     text-decoration: none;
   }
-  
+
   input[type=number]::-webkit-inner-spin-button,
   input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     appearance: none;
     margin: 0;
   }
-  
+
   input[type="number"] {
     -moz-appearance: textfield;
   }
-  
+
   input:-webkit-autofill,
   textarea:-webkit-autofill,
   select:-webkit-autofill {
@@ -335,7 +339,7 @@
     background-image: none;
     color: #000000;
   }
-  
+
   section,
   div,
   dl,
@@ -345,39 +349,39 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
   }
-  
-  
+
+
   /* ==================共用============================================================ */
-  
+
   .t_c {
     text-align: center;
   }
-  
+
   .t_r {
     text-align: right;
   }
-  
+
   .mar_t20 {
     margin-top: 20px;
   }
-  
+
   .mar_r6 {
     margin-right: 6px;
   }
-  
+
   .fl {
     float: left;
   }
-  
+
   .fr {
     float: right;
   }
-  
+
   .clearfix {
     display: block;
     zoom: 1;
   }
-  
+
   .clearfix:after {
     content: " ";
     display: block;
@@ -387,7 +391,7 @@
     visibility: hidden;
     overflow: hidden;
   }
-  
+
   .clearfix_line {
     content: "";
     clear: both;
@@ -396,7 +400,7 @@
     height: 1px;
     background: @line_color;
   }
-  
+
   .clearfix_liner {
     content: "";
     clear: both;
@@ -406,7 +410,7 @@
     height: 1px;
     background: @line_color;
   }
-  
+
   .clearfix_liner1 {
     content: "";
     clear: both;
@@ -419,43 +423,43 @@
     border-bottom: 1px dashed @line_color;
     margin-bottom: 22px;
   }
-  
+
   .grey {
     color: @grey;
   }
-  
+
   .black {
     color: @black;
   }
-  
+
   .red {
     color: @red;
   }
-  
+
   .orange {
     color: @orange;
   }
-  
+
   .success {
     color: @success;
   }
-  
+
   .warn {
     color: @warn;
   }
-  
+
   .danger {
     color: @danger;
   }
-  
+
   .border_red {
     color: @red;
   }
-  
+
   i.i_normal {
     font-style: normal;
   }
-  
+
   a.orange,
   a.orange:link,
   a.orange:visited,
@@ -464,14 +468,14 @@
     color: @orange;
     cursor: pointer;
   }
-  
+
   body {
     background: @background_color;
     color: @black;
     /* 增加该属性，可以增加弹性 */
     -webkit-overflow-scrolling: touch;
   }
-  
+
   //本页面
   .manage_body {
     width: 100%;
@@ -726,7 +730,7 @@
       }
     }
   }
-  
+
   .icon_quit {
     width: 16px;
     height: 21px;
@@ -737,7 +741,7 @@
     top: 6px;
     margin-right: 6px;
   }
-  
+
   //导航样式调整------elementUI特殊调整
   .header {
     .el-menu {
@@ -839,10 +843,10 @@
       }
     }
   }
-  
-  
+
+
   /*自适应特殊设置-----------------------------------------------------------------------------------------------------------------------*/
-  
+
   @media only screen and (min-width: 1450px) {
     header {
       width: 100%;
@@ -851,7 +855,7 @@
       padding: 0px 0px;
     }
   }
-  
+
   @media only screen and (max-width: 1450px) and (min-width: 768px) {
     header {
       width: 100%;
@@ -863,7 +867,7 @@
       margin: 0px auto;
     }
   }
-  
+
   @media only screen and (max-width: 768px) and (min-width: 500px) {
     header {
       width: 100%;
@@ -879,7 +883,7 @@
       padding-left: 0;
     }
   }
-  
+
   @media only screen and (max-width: 500px) {
     .container {
       width: auto;
@@ -904,11 +908,11 @@
       padding: 0 10px 20px;
     }
   }
-  
+
   //*通用样式---------------------------------------------------------------------------------------------------------------------*/
-  
+
   /*图片上传*/
-  
+
   //文件上传
   #uploadForm {
     width: 300px;
@@ -941,7 +945,7 @@
       }
     }
   }
-  
+
   .el_pic {
     width: 100%;
     position: relative;
@@ -1017,7 +1021,7 @@
       font-size: 0;
     }
   }
-  
+
   //*自定义组建样式---------------------左侧导航z-index:12------------------------------------------------------------------------------------------------*/
   //自定义弹框样式bounced------------------------z-index: 1020;
   .bounced_my {
@@ -1163,7 +1167,7 @@
       }
     }
   }
-  
+
   //*elementUI样式调整---------------------------------------------------------------------------------------------------------------------*/
   //加载按钮
   .bigIcon {
@@ -1181,31 +1185,31 @@
       font-size: 50px;
     }
   }
-  
+
   //table边框火狐浏览器显示--兼容性处理
   table {
     border-collapse: separate; //保留边框
   }
-  
+
   //隐藏日期插件的  清空 和 此刻 按钮____no_clear和no_now为自定义类
   .no_clear {
     .el-picker-panel__footer .el-picker-panel__link-btn {
       display: none;
     }
   }
-  
+
   .no_now {
     .el-picker-panel__footer .el-picker-panel__link-btn {
       display: none;
     }
   }
-  
+
   //列表搜索栏--时间输入框变短--0000-09
   .time_date_short .el-date-editor.el-input {
     width: 100%;
     min-width: 124px;
   }
-  
+
   //新信息框样式
   .el-popover {
     max-width: 500px;
@@ -1259,14 +1263,14 @@
       }
     }
   }
-  
+
   //隐藏下拉菜单--商户列表--修改详情--支行无数据匹配
   .no_nomatch {
     .el-select-dropdown__empty {
       display: none;
     }
   }
-  
+
   .el-radio__input.is-focus .el-radio__inner {
     background-color: @orange;
   }
