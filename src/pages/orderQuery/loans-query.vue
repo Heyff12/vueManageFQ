@@ -62,12 +62,12 @@
                   </el-table-column>
                   <el-table-column prop="apply_amt" label="申请金额（元）" resizable min-width="100px">
                   </el-table-column>
-                    <el-table-column prop="status" label="申请订单状态" resizable>
-                        <template slot-scope="scope">
-                            <span v-for="item in applyStauts" v-show="scope.row.status === item.tp">{{ item.text }}</span>
-                            <!--<span v-if="scope.row.status==1"  class="warn">已启动</span>-->
-                            <!--<span v-else class="danger">已关闭</span>-->
-                        </template>
+                    <el-table-column prop="status_desc" label="申请订单状态" resizable>
+                        <!--<template slot-scope="scope">-->
+                            <!--<span v-for="item in applyStauts" v-show="scope.row.status === item.tp">{{ item.text }}</span>-->
+                            <!--&lt;!&ndash;<span v-if="scope.row.status==1"  class="warn">已启动</span>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<span v-else class="danger">已关闭</span>&ndash;&gt;-->
+                        <!--</template>-->
                     </el-table-column>
                   <el-table-column prop="loan_amt" label="放款金额" resizable min-width="100px">
                   </el-table-column>
@@ -112,7 +112,7 @@ export default {
       },
       searchkey_rule: {
         shop_name: test_chinese("企业名称", 0, 15, false, "blur"),
-        orderno: test_number("好近申请订单号", 0, 20, false, "blur")
+        orderno: test_number("好近申请订单号", 0, 30, false, "blur")
       },
       applyStauts: [],
       list_url: "/fenqi_mis/v1/api/loan/list", //获取列表
