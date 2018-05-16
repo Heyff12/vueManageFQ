@@ -16,6 +16,9 @@ const partner_manager = () =>
 const partner_sales = () =>
     import ("@/pages/partner/sales"); //合作商信息管理--门店销售员信息
 
+const loans_query = () =>
+  import ("@/pages/orderQuery/loans-query"); //订单查询--商户贷订单查询
+
 Vue.use(Router)
 
 export default new Router({
@@ -54,6 +57,12 @@ export default new Router({
             path: "/partner_sales",
             name: "partner_sales",
             component: partner_sales
+        },
+      ///订单查询
+       {
+            path: "/orderQuery/loans_query",
+            name: "loans_query",
+            component: loans_query
         }
     ]
 });

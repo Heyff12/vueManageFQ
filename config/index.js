@@ -13,16 +13,17 @@ module.exports = {
         assetsSubDirectory: "static",
         assetsPublicPath: "/",
         proxyTable: {
-            // "/fenqi_mis/v1/api": {
-            //     target: "http://192.168.0.7:7020"
-            // }
             "/fenqi_mis/v1/api": {
-                target: "http://192.168.0.187:7020"
-            }
+                target: "http://192.168.0.7:7020"
+            },
+          changeOrigin:true
+            // "/fenqi_mis/v1/api": {
+            //     target: "http://192.168.0.187:7020"
+            // }
         },
 
         // Various Dev Server settings
-        host: "192.168.0.156", // can be overwritten by process.env.HOST
+        host: "192.168.0.172", // can be overwritten by process.env.HOST
         // host: "127.0.0.1", // can be overwritten by process.env.HOST
         port: 9090, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
         autoOpenBrowser: false,
