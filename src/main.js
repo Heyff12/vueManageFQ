@@ -17,7 +17,7 @@ Vue.prototype.$ajax_axios = ajax_axios //设置ajax请求全局变量
 Vue.use(ElementUI)
 
 //本地模拟数据-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-// import '../mock/global'
+import '../mock/global'
 
 //路由拦截，未登录返回登录页---------------------------------------------------------------------------------------------
 router.beforeEach(({ meta, path }, from, next) => {

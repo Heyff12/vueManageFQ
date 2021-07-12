@@ -7,6 +7,7 @@ const home = () =>
     import ("@/pages/home")
 const partner_index = () =>
     import ("@/pages/partner"); //合作商信息管理--合作商信息
+//import partner_index from "@/pages/partner"; //合作商信息管理--合作商信息
 const partner_region = () =>
     import ("@/pages/partner/region"); //合作商信息管理--大区责任人信息
 const partner_excel = () =>

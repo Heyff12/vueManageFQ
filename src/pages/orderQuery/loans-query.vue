@@ -14,7 +14,7 @@
                   <el-col :xs="24" :sm="24" :md="12" :lg="8">
                     <el-form-item label="申请订单状态：">
                       <el-select v-model="searchkey.status" placeholder="请选择运行状态">
-                        <el-option v-for="status in applyStauts" :label=status.text :value=status.tp ></el-option>
+                        <el-option v-for="status in applyStauts" :label=status.text :value=status.tp :key=status.tp></el-option>
                         <!--<el-option label="已启动" value="1"></el-option>-->
                         <!--<el-option label="已关闭" value="2"></el-option>-->
                       </el-select>
